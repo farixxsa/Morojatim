@@ -1,0 +1,278 @@
+<!DOCTYPE html> 
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Morojatim.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f4f9;
+      color: #212529;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      border-radius: 8px;
+    }
+
+    /* Header */
+    header {
+      background: url('https://source.unsplash.com/1600x400/?east-java,indonesia') center/cover no-repeat;
+      position: relative;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 73, 163, 0.75);
+      z-index: 0;
+    }
+    header h1 {
+      position: relative;
+      font-size: 3.8rem;
+      font-weight: 700;
+      z-index: 1;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    header p {
+      position: relative;
+      font-size: 1.5rem;
+      font-weight: 400;
+      z-index: 1;
+      margin: auto;
+      max-width: 600px;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #0049a3;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px 0;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav button {
+      background: transparent;
+      border: none;
+      color: #cce4ff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      position: relative;
+    }
+    nav button:hover,
+    nav button.active {
+      background-color: #cce4ff;
+      color: #0049a3;
+      box-shadow: 0 2px 8px rgb(0 73 163 / 0.4);
+    }
+    nav button:hover {
+      background-color: #0d47a1;
+      color: #ffca28;
+      transform: scale(1.05);
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* Main container */
+    .container {
+      max-width: 900px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 12px 25px rgb(0 0 0 / 0.08);
+      min-height: 400px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+
+    /* Section content styling */
+    .section-content {
+      display: none;
+      padding: 30px 40px;
+      animation: fadeInUp 0.6s ease forwards;
+      color: #212529;
+    }
+    .section-content.active {
+      display: block;
+    }
+    .section-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #0049a3;
+      border-bottom: 3px solid #0049a3;
+      padding-bottom: 8px;
+      letter-spacing: 1.5px;
+    }
+    .section-content p {
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0049a3;
+      color: #cce4ff;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: auto;
+      user-select: none;
+    }
+
+    /* Scrollbar styling for container */
+    .container::-webkit-scrollbar {
+      width: 8px;
+    }
+    .container::-webkit-scrollbar-track {
+      background: #f0f4f9;
+    }
+    .container::-webkit-scrollbar-thumb {
+      background-color: #0049a3;
+      border-radius: 20px;
+      border: 2px solid #f0f4f9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Morojatim.com</h1>
+    <p>Datang dan temukan cerita di Jawa Timur</p>
+  </header>
+  <nav>
+    <button class="active" onclick="showSection('halaman-pembuka', this)">Halaman Pembuka</button>
+    <button onclick="showSection('sejarah', this)">Sejarah</button>
+    <button onclick="showSection('baju-adat', this)">Baju Adat</button>
+    <button onclick="showSection('rumah-tradisional', this)">Rumah Tradisional</button>
+    <button onclick="showSection('tarian-tradisional', this)">Tarian Tradisional</button>
+    <button onclick="showSection('senjata-tradisional', this)">Senjata Tradisional</button>
+    <button onclick="showSection('upacara-adat', this)">Upacara Adat</button>
+    <button onclick="showSection('makanan-adat', this)">Makanan Adat</button>
+  </nav>
+
+  <main class="container" id="main-content" tabindex="0">
+    <section id="halaman-pembuka" class="section-content active">
+      <h2>Halaman Pembuka</h2>
+      <p>Jawa Timur adalah provinsi di bagian timur Pulau Jawa yang kaya akan keindahan alam, warisan budaya, dan kuliner lezat. Dari Gunung Bromo yang megah hingga Pantai Papuma yang menawan, Jawa Timur menawarkan pengalaman wisata yang tak terlupakan.</p>
+      <p>Jawa Timur juga memiliki baju adat, rumah tradisional, pakaian adat, senjata tradisional, dan upacara adat. Nah jika kalian ingin mengenal lebih dalam tentang Jawa Timur. Yuk simak artikel dari kami!!</p>
+    </section>
+
+    <section id="sejarah" class="section-content">
+      <h2>Sejarah</h2>
+      <img src="https://3.bp.blogspot.com/-E8g7YWnLqUg/URcLxhPoISI/AAAAAAAACZc/uBREa1-qJo8/s1600/history.png" />
+      <p id="sejarah-text">Provinsi Jawa Timur memiliki sejarah panjang dan kaya yang menjadi bagian penting dari peradaban Indonesia. Wilayah ini merupakan tempat berdirinya dua kerajaan besar Nusantara, yaitu Kerajaan Singhasari dan Kerajaan Majapahit. Majapahit dikenal luas sebagai kerajaan terbesar dan paling berpengaruh dalam sejarah Indonesia, dengan wilayah kekuasaan yang meliputi sebagian besar Asia Tenggara. Setelah masa kerajaan, Jawa Timur mengalami masa kolonial Belanda dan Jepang, hingga akhirnya menjadi bagian dari Republik Indonesia pada tahun 1945. Provinsi ini secara resmi dibentuk pada 19 Agustus 1945 dan terus berkembang sebagai salah satu wilayah dengan kontribusi besar di bidang ekonomi, budaya, dan pendidikan.</p>
+      <p>Keanekaragaman budaya yang ada di Jawa Timur saat ini merupakan hasil dari perjalanan panjang sejarah tersebut. Masyarakatnya terdiri dari berbagai etnis seperti Jawa, Madura, Osing, dan Tengger yang hidup berdampingan dan melestarikan warisan leluhur mereka.</p>
+      <p><strong>Filosofi Sejarah:</strong> Sejarah bukan hanya catatan masa lalu, tetapi menjadi fondasi identitas dan arah masa depan. Melalui pemahaman sejarah, generasi sekarang dapat menghargai nilai-nilai perjuangan, kearifan lokal, dan kebesaran budaya yang membentuk karakter masyarakat Jawa Timur.</p>
+    </section>
+
+    <section id="baju-adat" class="section-content">
+      <h2>Baju Adat</h2>
+      <img src="https://www.selasar.com/wp-content/uploads/2020/08/Pesaan-Madura-pakaian-adat-jawa-timur.jpg" />
+      <p id="baju-adat-text">Baju Pesa’an Madura adalah baju khas dari Pulau Madura yang digunakan dalam kegiatan sehari-hari hingga acara resmi seperti upacara adat dan peringatan nasional. Kaos lorek merah putih mencerminkan karakter orang Madura yang tegas dan berani. Celananya gombrang dengan ikat pinggang, dilengkapi sarung sebagai pelapis luar.</p>
+      <p>Kebaya Rancongan digunakan oleh wanita dengan warna cerah dan bahan transparan, menampilkan kepercayaan diri wanita Madura. Kebaya ini dipadukan dengan jarik batik bermotif khas seperti Tabiruan, Storjan, dan Lasem.</p>
+    </section>
+
+    <section id="rumah-tradisional" class="section-content">
+      <h2>Rumah Tradisional</h2>
+      <img src="https://1001indonesia.net/asset/2017/03/Joglo-Pencu-Rumah-Tradisional-Khas-Kudus.jpg" />
+      <p id="rumah-tradisional-text">Rumah Joglo melambangkan hubungan manusia dengan alam dan Tuhan. Atap berbentuk tajug menggambarkan kesakralan gunung, soko guru mewakili kekuatan dari empat penjuru mata angin, dan pendapa yang luas menunjukkan keterbukaan pemilik rumah.</p>
+    </section>
+
+    <section id="tarian-tradisional" class="section-content">
+      <h2>Tarian Tradisional</h2>
+      <img src="https://bergaya.id/wp-content/uploads/2020/10/Gerakan-Tari-Jaipong.jpg" />
+      <p id="tarian-tradisional-text">Jawa Timur memiliki beragam tarian tradisional yang mencerminkan budaya dan adat istiadat masyarakatnya. Contohnya adalah Tari Remo, Tari Gandrung, dan Tari Topeng Malangan yang kerap dipentaskan dalam acara adat dan festival budaya.</p>
+    </section>
+
+    <section id="senjata-tradisional" class="section-content">
+      <h2>Senjata Tradisional</h2>
+      <img src="https://tse3.mm.bing.net/th?id=OIP.3aR8RaOPRKRMaNqgX24wqAHaE8&pid=Api&P=0&h=220" />
+      <p id="senjata-tradisional-text">Senjata tradisional Jawa Timur bernama Bendo. Bilahnya pendek dan lebar, terbuat dari besi dan baja, dengan gagang dari kayu jati atau sonokeling. Digunakan untuk memotong daging, bambu, kayu, serta sebagai alat pertahanan diri.</p>
+      <p>Di Madura, Bendo memiliki peranan penting dalam kehidupan sehari-hari dan menjadi simbol budaya lokal.</p>
+    </section>
+
+    <section id="upacara-adat" class="section-content">
+      <h2>Upacara Adat</h2>
+      <img src="https://tse2.mm.bing.net/th?id=OIP.Vivvpp0IAsgrO6n6YVkyjAHaEK&pid=Api&P=0&h=220" />
+      <p id="upacara-adat-text">Yadnya Kasada adalah ritual dari Suku Tengger di Gunung Bromo. Dilaksanakan setiap bulan Kasada tanggal 15, berupa pelemparan sesaji ke kawah sebagai bentuk rasa syukur dan penghormatan terhadap leluhur.</p>
+      <p>Nilai budayanya mencerminkan rasa syukur, kebersamaan, penghormatan terhadap leluhur, dan pelestarian alam.</p>
+    </section>
+
+    <section id="makanan-adat" class="section-content">
+      <h2>Makanan Adat</h2>
+      <img src="https://tse3.mm.bing.net/th?id=OIP.InylJspB_NnWEFADfeZWOQHaEc&pid=Api&P=0&h=220" />
+      <p id="makanan-adat-text">Jawa Timur kaya akan makanan adat yang menggugah selera, seperti Rawon, Soto Lamongan, dan Rujak Cingur. Makanan tersebut tidak hanya lezat, tapi juga memiliki nilai sejarah dan filosofi yang melekat pada tradisi masyarakat setempat.</p>
+    </section>
+  </main>
+
+  <footer>
+    2025 Morojatim.com - Semua Hak Dilindungi | Desain oleh Faris Hanif Pratama
+  </footer>
+
+  <script>
+    function showSection(id, btn) {
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+      const targetSection = document.getElementById(id);
+      targetSection.classList.add('active');
+      const container = document.getElementById('main-content');
+      container.focus();
+      const scrollTarget = document.getElementById(id + '-text');
+      if (scrollTarget) {
+        const containerTop = container.getBoundingClientRect().top;
+        const targetTop = scrollTarget.getBoundingClientRect().top;
+        const scrollPos = targetTop - containerTop + container.scrollTop - 20;
+        container.scrollTo({ top: scrollPos, behavior: 'smooth' });
+      } else {
+        container.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+</html>
+
+
